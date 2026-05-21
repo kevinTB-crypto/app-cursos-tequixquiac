@@ -52,3 +52,23 @@ class Database:
         self.cursor.execute("DELETE FROM cursos WHERE id = ?", (course_id,))
 
         self.connection.commit()
+
+    def update_course(self, course_id, title, description, duration):
+
+        self.cursor.execute(
+            """
+
+        UPDATE cursos
+
+        SET
+            titulo = ?,
+            descripcion = ?,
+            duracion = ?
+
+        WHERE id = ?
+
+        """,
+            (title, description, duration, course_id),
+        )
+
+        self.connection.commit()

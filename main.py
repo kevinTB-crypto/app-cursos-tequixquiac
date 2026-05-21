@@ -7,6 +7,7 @@ from screens.courses import CoursesScreen
 from screens.register import RegisterScreen
 from screens.admin import AdminScreen
 from database.db import Database
+from screens.edit_course import EditCourseScreen
 
 
 class MainApp(MDApp):
@@ -34,6 +35,7 @@ class MainApp(MDApp):
         sm.add_widget(CoursesScreen())
         sm.add_widget(RegisterScreen())
         sm.add_widget(AdminScreen())
+        sm.add_widget(EditCourseScreen())
 
         return sm
 
