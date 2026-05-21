@@ -109,7 +109,7 @@ KV = """
                         text: "Panel Admin"
                         pos_hint: {"center_x": .5}
                         on_release:
-                            app.change_screen("admin")
+                            app.change_screen("login")
 """
 
 Builder.load_string(KV)
