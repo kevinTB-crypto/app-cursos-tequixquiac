@@ -10,7 +10,7 @@ KV = """
         orientation: "vertical"
 
         MDTopAppBar:
-            title: "Cursos Tequixquiac"
+            title: "Cursos pip Tequixquiac"
 
         MDLabel:
             text: "Bienvenido"
