@@ -46,3 +46,9 @@ class Database:
         self.cursor.execute("SELECT * FROM cursos")
 
         return self.cursor.fetchall()
+
+    def delete_course(self, course_id):
+
+        self.cursor.execute("DELETE FROM cursos WHERE id = ?", (course_id,))
+
+        self.connection.commit()

@@ -2,6 +2,7 @@ from kivymd.uix.screen import MDScreen
 from kivy.lang import Builder
 
 from database.db import Database
+from components.course_card import CourseCard
 
 KV = """
 
@@ -21,39 +22,11 @@ KV = """
         ScrollView:
 
             MDBoxLayout:
+                id: admin_box
                 orientation: "vertical"
                 adaptive_height: True
                 spacing: "20dp"
                 padding: "20dp"
-
-                MDLabel:
-                    text: "Agregar nuevo curso"
-                    halign: "center"
-                    font_style: "H5"
-
-                MDTextField:
-                    id: title_field
-                    hint_text: "Título del curso"
-
-                MDTextField:
-                    id: description_field
-                    hint_text: "Descripción"
-
-                MDTextField:
-                    id: duration_field
-                    hint_text: "Duración"
-
-                MDRaisedButton:
-                    text: "Guardar curso"
-                    pos_hint: {"center_x": .5}
-                    on_release:
-                        root.save_course()
-
-                MDLabel:
-                    id: message_label
-                    text: ""
-                    halign: "center"
-                    theme_text_color: "Primary"
 
 """
 
@@ -62,23 +35,36 @@ Builder.load_string(KV)
 
 class AdminScreen(MDScreen):
 
-    def save_course(self):
+    def on_enter(self):
 
-        title = self.ids.title_field.text
-        description = self.ids.description_field.text
-        duration = self.ids.duration_field.text
+        self.load_admin_panel()
 
-        if title == "" or description == "" or duration == "":
+    def load_admin_panel(self):
 
-            self.ids.message_label.text = "Completa todos los campos"
-            return
+        self.ids.admin_box.clear_widgets()
 
         db = Database()
 
-        db.add_course(title, description, duration)
+        courses = db.get_courses()
 
-        self.ids.message_label.text = "Curso agregado correctamente"
+        for course in courses:
 
-        self.ids.title_field.text = ""
-        self.ids.description_field.text = ""
-        self.ids.duration_field.text = ""
+            card = CourseCard(
+                title=course[1],
+                description=course[2],
+                duration=course[3],
+                button_text="Eliminar",
+                button_callback=lambda x, course_id=course[0]: self.delete_course(
+                    course_id
+                ),
+            )
+
+            self.ids.admin_box.add_widget(card)
+
+    def delete_course(self, course_id):
+
+        db = Database()
+
+        db.delete_course(course_id)
+
+        self.load_admin_panel()

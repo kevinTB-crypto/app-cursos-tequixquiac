@@ -1,5 +1,4 @@
 from kivymd.uix.card import MDCard
-from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.label import MDLabel
 from kivymd.uix.button import MDRaisedButton
 from kivymd.uix.fitimage import FitImage
@@ -7,7 +6,16 @@ from kivymd.uix.fitimage import FitImage
 
 class CourseCard(MDCard):
 
-    def __init__(self, title, description, duration, **kwargs):
+    def __init__(
+        self,
+        title,
+        description,
+        duration,
+        button_text="Ver más",
+        button_callback=None,
+        **kwargs,
+    ):
+
         super().__init__(**kwargs)
 
         self.orientation = "vertical"
@@ -35,7 +43,10 @@ class CourseCard(MDCard):
 
         duration_label = MDLabel(text=f"Duración: {duration}", adaptive_height=True)
 
-        button = MDRaisedButton(text="Ver más", pos_hint={"center_x": 0.5})
+        button = MDRaisedButton(text=button_text, pos_hint={"center_x": 0.5})
+
+        if button_callback:
+            button.bind(on_release=button_callback)
 
         self.add_widget(image)
         self.add_widget(title_label)
