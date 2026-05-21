@@ -6,6 +6,7 @@ from screens.home import HomeScreen
 from screens.courses import CoursesScreen
 from screens.register import RegisterScreen
 from screens.admin import AdminScreen
+from database.db import Database
 
 
 class MainApp(MDApp):
@@ -14,6 +15,18 @@ class MainApp(MDApp):
 
         self.theme_cls.primary_palette = "Blue"
         self.theme_cls.theme_style = "Light"
+
+        db = Database()
+
+        courses = db.get_courses()
+
+        if len(courses) == 0:
+
+            db.add_course("Panadería", "Aprende elaboración de pan.", "3 meses")
+
+            db.add_course("Computación", "Curso básico de informática.", "2 meses")
+
+            db.add_course("Belleza", "Curso profesional de estilismo.", "4 meses")
 
         sm = ScreenManager()
 

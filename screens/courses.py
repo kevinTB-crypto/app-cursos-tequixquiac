@@ -1,6 +1,8 @@
 from kivymd.uix.screen import MDScreen
 from kivy.lang import Builder
+
 from components.course_card import CourseCard
+from database.db import Database
 
 KV = """
 
@@ -25,6 +27,7 @@ KV = """
                 adaptive_height: True
                 spacing: "20dp"
                 padding: "20dp"
+
 """
 
 Builder.load_string(KV)
@@ -36,35 +39,14 @@ class CoursesScreen(MDScreen):
 
         self.ids.courses_box.clear_widgets()
 
-        courses = [
-            {
-                "title": "Panadería",
-                "description": "Aprende elaboración de pan y repostería.",
-                "duration": "3 meses",
-            },
-            {
-                "title": "Belleza",
-                "description": "Curso profesional de estilismo.",
-                "duration": "4 meses",
-            },
-            {
-                "title": "Computación",
-                "description": "Ofimática y herramientas digitales.",
-                "duration": "2 meses",
-            },
-            {
-                "title": "Inglés",
-                "description": "Curso básico e intermedio.",
-                "duration": "6 meses",
-            },
-        ]
+        db = Database()
+
+        courses = db.get_courses()
 
         for course in courses:
 
             card = CourseCard(
-                title=course["title"],
-                description=course["description"],
-                duration=course["duration"],
+                title=course[1], description=course[2], duration=course[3]
             )
 
             self.ids.courses_box.add_widget(card)
