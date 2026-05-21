@@ -1,5 +1,6 @@
 from kivymd.app import MDApp
 from kivy.uix.screenmanager import ScreenManager
+from kivymd.uix.fitimage import FitImage
 
 from screens.home import HomeScreen
 from screens.courses import CoursesScreen
