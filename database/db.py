@@ -72,3 +72,18 @@ class Database:
         )
 
         self.connection.commit()
+
+    def search_courses(self, query):
+
+        self.cursor.execute(
+            """
+
+        SELECT * FROM cursos
+
+        WHERE titulo LIKE ?
+
+        """,
+            (f"%{query}%",),
+        )
+
+        return self.cursor.fetchall()
