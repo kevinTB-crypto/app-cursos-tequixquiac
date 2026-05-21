@@ -86,6 +86,30 @@ KV = """
                         pos_hint: {"center_x": .5}
                         on_release:
                             app.change_screen("register")
+
+                MDCard:
+                    orientation: "vertical"
+                    padding: "20dp"
+                    spacing: "10dp"
+                    size_hint_y: None
+                    height: "180dp"
+                    radius: [20]
+                    elevation: 3
+
+                    MDLabel:
+                        text: "Administrador"
+                        font_style: "H5"
+                        bold: True
+
+                    MDLabel:
+                        text: "Gestiona cursos y contenido."
+                        theme_text_color: "Secondary"
+
+                    MDRaisedButton:
+                        text: "Panel Admin"
+                        pos_hint: {"center_x": .5}
+                        on_release:
+                            app.change_screen("admin")
 """
 
 Builder.load_string(KV)
