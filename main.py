@@ -1,35 +1,30 @@
 from kivymd.app import MDApp
-from kivy.lang import Builder
-from kivymd.uix.screen import MDScreen
+from kivy.uix.screenmanager import ScreenManager
 
-KV = """
-MDScreen:
-
-    md_bg_color: 1, 1, 1, 1
-
-    MDTopAppBar:
-        title: "Cursos Tequixquiac"
-        pos_hint: {"top": 1}
-
-    MDLabel:
-        text: "Bienvenido"
-        halign: "center"
-        font_style: "H4"
-        pos_hint: {"center_y": .6}
-
-    MDRaisedButton:
-        text: "Ver Cursos"
-        pos_hint: {"center_x": .5, "center_y": .4}
-"""
+from screens.home import HomeScreen
+from screens.courses import CoursesScreen
+from screens.register import RegisterScreen
+from screens.admin import AdminScreen
 
 
 class MainApp(MDApp):
 
     def build(self):
+
         self.theme_cls.primary_palette = "Blue"
         self.theme_cls.theme_style = "Light"
 
-        return Builder.load_string(KV)
+        sm = ScreenManager()
+
+        sm.add_widget(HomeScreen())
+        sm.add_widget(CoursesScreen())
+        sm.add_widget(RegisterScreen())
+        sm.add_widget(AdminScreen())
+
+        return sm
+
+    def change_screen(self, screen_name):
+        self.root.current = screen_name
 
 
 MainApp().run()
