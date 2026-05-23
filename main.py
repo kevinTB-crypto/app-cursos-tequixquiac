@@ -1,4 +1,5 @@
 from kivymd.app import MDApp
+from kivymd.uix.label import MDLabel
 from kivy.uix.screenmanager import ScreenManager
 from kivymd.uix.fitimage import FitImage
 
@@ -12,10 +13,12 @@ from screens.login import LoginScreen
 
 
 class MainApp(MDApp):
-    MDLabel(
-    text="Hola",
-    theme_text_color="Primary"
-)
+    def build(self):
+        return MDLabel(
+            text="",    
+            theme_text_color="RED"
+        )
+
 
     def build(self):
 
