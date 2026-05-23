@@ -12,6 +12,10 @@ from screens.login import LoginScreen
 
 
 class MainApp(MDApp):
+    MDLabel(
+    text="Hola",
+    theme_text_color="Primary"
+)
 
     def build(self):
 
