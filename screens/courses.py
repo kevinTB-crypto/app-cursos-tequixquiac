@@ -5,7 +5,7 @@ from components.course_card import CourseCard
 from database.db import Database
 
 
-KV = '''
+KV = """
 
 <CoursesScreen>
 
@@ -65,7 +65,7 @@ KV = '''
                 spacing: "20dp"
                 padding: "20dp"
 
-'''
+"""
 
 Builder.load_string(KV)
 
