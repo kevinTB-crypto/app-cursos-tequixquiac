@@ -15,7 +15,8 @@ class MainApp(MDApp):
 
     def build(self):
 
-        self.theme_cls.primary_palette = "Blue"
+        # MODIFICACIÓN: Cambiado de "Blue" a "DeepPurple"
+        self.theme_cls.primary_palette = "DeepPurple"
         self.theme_cls.theme_style = "Light"
 
         db = Database()
