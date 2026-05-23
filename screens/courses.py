@@ -4,6 +4,7 @@ from kivy.lang import Builder
 from components.course_card import CourseCard
 from database.db import Database
 
+
 KV = """
 
 <CoursesScreen>
@@ -20,13 +21,40 @@ KV = """
                 [["arrow-left",
                 lambda x: app.change_screen("home")]]
 
-        MDTextField:
-            id: search_field
-            hint_text: "Buscar curso..."
-            size_hint_x: .95
-            pos_hint: {"center_x": .5}
-            on_text:
-                root.search_courses(self.text)
+        MDBoxLayout:
+            orientation: "vertical"
+            padding: "10dp"
+            spacing: "10dp"
+            adaptive_height: True
+
+            MDTextField:
+                id: search_field
+                hint_text: "Buscar cursos..."
+                mode: "round"
+                icon_right: "magnify"
+                on_text:
+                    root.search_courses(self.text)
+
+            MDScrollView:
+
+                MDGridLayout:
+                    cols: 2
+                    adaptive_height: True
+                    spacing: "10dp"
+
+                    MDRaisedButton:
+                        text: "Todos"
+                        on_release:
+                            root.load_courses()
+
+                    MDRaisedButton:
+                        text: "Tecnología"
+
+                    MDRaisedButton:
+                        text: "Belleza"
+
+                    MDRaisedButton:
+                        text: "Gastronomía"
 
         ScrollView:
 
@@ -65,7 +93,11 @@ class CoursesScreen(MDScreen):
         for course in courses:
 
             card = CourseCard(
-                title=course[1], description=course[2], duration=course[3]
+
+                title=course[1],
+                description=course[2],
+                duration=course[3]
+
             )
 
             self.ids.courses_box.add_widget(card)

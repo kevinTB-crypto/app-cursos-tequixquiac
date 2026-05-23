@@ -1,4 +1,5 @@
 from kivymd.app import MDApp
+from kivymd.uix.label import MDLabel
 from kivy.uix.screenmanager import ScreenManager
 from kivymd.uix.fitimage import FitImage
 
@@ -12,10 +13,21 @@ from screens.login import LoginScreen
 
 
 class MainApp(MDApp):
+    def build(self):
+        return MDLabel(
+            text="",    
+            theme_text_color="RED"
+        )
+
 
     def build(self):
 
+<<<<<<< HEAD
         self.theme_cls.primary_palette = "Green"
+=======
+        # MODIFICACIÓN: Cambiado de "Blue" a "DeepPurple"
+        self.theme_cls.primary_palette = "DeepPurple"
+>>>>>>> b1ae333aaab4917acfe892588f7d31b697464052
         self.theme_cls.theme_style = "Light"
 
         db = Database()
